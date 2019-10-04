@@ -1,0 +1,16 @@
+version: '2.1'
+
+services:
+  news-explorer-client:
+    build: news-explorer-client
+    volumes:
+      - ./news-explorer-client:/usr/src/app
+    ports:
+      - 4200:4200
+      - 49153:49153
+  news-explorer-server:
+    build: news-explorer-server
+    volumes:
+      - ./news-explorer-server:/usr/src/app
+    ports:
+      - 3000:3000
