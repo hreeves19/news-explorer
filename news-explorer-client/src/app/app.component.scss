@@ -1,0 +1,33 @@
+.top-nav {
+  overflow: hidden;
+  position: fixed; /* Set the navbar to fixed position */
+  top: 0; /* Position the navbar at the top of the page */
+  width: 100%; /* Full width */
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  z-index: 999999;
+}
+
+.top-nav-link {
+  font-size: .8em;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+.secondary-nav {
+  margin-top: 4rem;
+}
+
+.main-container {
+  padding-top: 4rem;
+  position: relative;
+  min-height: calc(100vh - 4rem);
+  width: 100%;
+}
+
+.background-color {
+
+}
