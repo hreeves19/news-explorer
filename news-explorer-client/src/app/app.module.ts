@@ -5,22 +5,23 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
-  MatToolbarModule
+  MatToolbarModule, MatButtonModule
 } from '@angular/material';
-import { SearchComponent } from './pages/search/search.component';
-import { HomeComponent } from './pages/home/home.component';
+import { HomeModule } from './pages/home/home.module';
+import { SearchModule } from './pages/search/search.module';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    SearchComponent,
-    HomeComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MatToolbarModule
+    MatToolbarModule,
+    HomeModule,
+    MatButtonModule,
+    SearchModule
   ],
   providers: [],
   bootstrap: [AppComponent]
