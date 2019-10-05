@@ -9,6 +9,8 @@ import {
 } from '@angular/material';
 import { HomeModule } from './pages/home/home.module';
 import { SearchModule } from './pages/search/search.module';
+import { GoogleNewsService } from './services/google-news.service';
+import { CountryService } from './services/country.service';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,7 @@ import { SearchModule } from './pages/search/search.module';
     MatButtonModule,
     SearchModule
   ],
-  providers: [],
+  providers: [GoogleNewsService, CountryService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
