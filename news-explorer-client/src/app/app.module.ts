@@ -11,6 +11,8 @@ import { HomeModule } from './pages/home/home.module';
 import { SearchModule } from './pages/search/search.module';
 import { GoogleNewsService } from './services/google-news.service';
 import { CountryService } from './services/country.service';
+import { HttpClientModule } from '@angular/common/http';
+import { GoogleNewsModule } from './tables/google-news/google-news.module';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,9 @@ import { CountryService } from './services/country.service';
     MatToolbarModule,
     HomeModule,
     MatButtonModule,
-    SearchModule
+    SearchModule,
+    HttpClientModule,
+    GoogleNewsModule
   ],
   providers: [GoogleNewsService, CountryService],
   bootstrap: [AppComponent]

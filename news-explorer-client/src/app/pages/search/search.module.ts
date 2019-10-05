@@ -1,8 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatToolbarModule, MatFormFieldModule, MatCardModule } from '@angular/material';
+import { MatToolbarModule, MatFormFieldModule, MatCardModule, MatTableModule, MatSortModule, MatPaginatorModule } from '@angular/material';
 import { FormsModule } from '@angular/forms';
 import { SearchComponent } from './search.component';
+import { GoogleNewsComponent } from '../../tables/google-news/google-news.component';
+import { GoogleNewsModule } from 'src/app/tables/google-news/google-news.module';
 
 
 
@@ -14,7 +16,11 @@ import { SearchComponent } from './search.component';
     MatToolbarModule,
     MatFormFieldModule,
     FormsModule,
-    MatCardModule
+    MatCardModule,
+    MatTableModule,
+    MatSortModule,
+    MatPaginatorModule,
+    GoogleNewsModule
   ]
 })
 export class SearchModule { }

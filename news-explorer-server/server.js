@@ -46,14 +46,7 @@ app.get('/headlines/', (req, res) => {
     language: 'en',
     country: 'us'
   }).then(response => {
-    console.log(response);
     res.json(response);
-    /*
-      {
-        status: "ok",
-        articles: [...]
-      }
-    */
   });
 });
 
