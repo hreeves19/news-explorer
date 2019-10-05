@@ -1,6 +1,12 @@
 const express = require('express');
 var bodyParser = require('body-parser');
+const NewsAPI = require('newsapi');
+const newsapi = new NewsAPI('df7db6bf96164e4180d048b93e1e5a38');
 require('dotenv').config({path: __dirname + '/.env'});
+
+// For reading json files
+var fs = require('fs');
+const countries = require('./json-data/countries.json');
 
 const app = express();
 const port = process.env['PORT'];
@@ -35,8 +41,25 @@ app.get('/', (req, res) => {
   res.send('\n\nHello, world dawgggg!\n\n');
 });
 
-app.get('/shipwrecks/', (req, res) => {
-  res.send('Get shipwrecks');
+app.get('/headlines/', (req, res) => {
+  newsapi.v2.topHeadlines({
+    language: 'en',
+    country: 'us'
+  }).then(response => {
+    console.log(response);
+    res.json(response);
+    /*
+      {
+        status: "ok",
+        articles: [...]
+      }
+    */
+  });
+});
+
+// Returns the json file containing the countries
+app.get('/countries/', (req, res) => {
+  res.json(countries);
 });
 
 app.get('/about', function (req, res) {
