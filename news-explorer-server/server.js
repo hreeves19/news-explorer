@@ -1,8 +1,9 @@
 const express = require('express');
 var bodyParser = require('body-parser');
-const NewsAPI = require('newsapi');
-const newsapi = new NewsAPI('df7db6bf96164e4180d048b93e1e5a38');
 require('dotenv').config({path: __dirname + '/.env'});
+const newYorkTimesRoute = require('./routes/newYorkTimesRoute');
+const guardianRoute = require('./routes/guardianRoute');
+const googleRoute = require('./routes/googleRoute');
 
 // For reading json files
 var fs = require('fs');
@@ -37,17 +38,12 @@ app.use(bodyParser.urlencoded());
 // in latest body-parser use like below.
 app.use(bodyParser.urlencoded({ extended: true }));
 
+app.use('/newyorktimesHeadlines', newYorkTimesRoute);
+app.use('/guardianHeadlines', guardianRoute);
+app.use('/googleHeadlines', googleRoute);
+
 app.get('/', (req, res) => {
   res.send('\n\nHello, world dawgggg!\n\n');
-});
-
-app.get('/headlines/', (req, res) => {
-  newsapi.v2.topHeadlines({
-    language: 'en',
-    country: 'us'
-  }).then(response => {
-    res.json(response);
-  });
 });
 
 // Returns the json file containing the countries

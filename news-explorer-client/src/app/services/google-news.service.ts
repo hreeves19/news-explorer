@@ -14,6 +14,6 @@ export class GoogleNewsService {
   ) { }
 
   getAllHeadlines() {
-    return this.http.get(`${environment.expressServerName}headlines/`);
+    return this.http.get(`${environment.expressServerName}googleHeadlines/`);
   }
 }
