@@ -13,6 +13,8 @@ import { GoogleNewsService } from './services/google-news.service';
 import { CountryService } from './services/country.service';
 import { HttpClientModule } from '@angular/common/http';
 import { GoogleNewsModule } from './tables/google-news/google-news.module';
+import { GuardianService } from './services/guardian.service';
+import { NewYorkTimesService } from './services/new-york-times.service';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,7 @@ import { GoogleNewsModule } from './tables/google-news/google-news.module';
     HttpClientModule,
     GoogleNewsModule
   ],
-  providers: [GoogleNewsService, CountryService],
+  providers: [GoogleNewsService, CountryService, GuardianService, NewYorkTimesService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
