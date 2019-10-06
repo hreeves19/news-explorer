@@ -3,4 +3,66 @@
     <h1>Advanced Search</h1>
   </mat-toolbar-row>
 </mat-toolbar>
-<app-google-news></app-google-news>
+<form>
+    <mat-card class="search-card">
+      <mat-card-header>
+        <mat-card-title>News - Advanced Search</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="flex-container">
+          <div class="flex-group">
+            <!-- News Source -->
+            <mat-form-field>
+              <mat-label>News Sources</mat-label>
+              <mat-select [formControl]="source">
+                <mat-option *ngFor="let source of newsSources" [value]="source.value">
+                  {{source.name}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <!-- Countries -->
+            <mat-form-field>
+              <mat-label>Countries</mat-label>
+              <mat-select [formControl]=listOfCountries multiple>
+                <mat-option *ngFor="let country of countries" [value]="country.Code">
+                  {{country.Name}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="flex-group">
+            <!-- Key Words -->
+            <mat-form-field>
+              <input matInput placeholder="Keywords" [formControl]="keyWords">
+            </mat-form-field>
+            <!-- Article Title -->
+            <mat-form-field>
+              <input matInput placeholder="Keywords in Title" [formControl]="title">
+            </mat-form-field>
+            <!-- From -->
+            <mat-form-field>
+              <input matInput [matDatepicker]="fromDate" placeholder="From" [formControl]="from">
+              <mat-datepicker-toggle matSuffix [for]="fromDate"></mat-datepicker-toggle>
+              <mat-datepicker #fromDate></mat-datepicker>
+            </mat-form-field>
+            <!-- From -->
+            <mat-form-field>
+              <input matInput [matDatepicker]="toDate" placeholder="To" [formControl]="to">
+              <mat-datepicker-toggle matSuffix [for]="toDate"></mat-datepicker-toggle>
+              <mat-datepicker #toDate></mat-datepicker>
+            </mat-form-field>
+          </div>
+
+          <!-- Title -->
+        </div>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button color="secondary">Clear</button>
+        <button mat-raised-button color="primary" type="submit">Search</button>
+      </mat-card-actions>
+    </mat-card>
+</form>
+
+
+
+
