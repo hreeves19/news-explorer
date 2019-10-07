@@ -16,4 +16,8 @@ export class CountryService {
   getAllCountries() {
     return this.http.get(`${environment.expressServerName}countries/`);
   }
+
+  getAllLanguages() {
+    return this.http.get(`${environment.expressServerName}languages/`);
+  }
 }

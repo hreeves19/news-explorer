@@ -8,6 +8,7 @@ const googleRoute = require('./routes/googleRoute');
 // For reading json files
 var fs = require('fs');
 const countries = require('./json-data/countries.json');
+const languages = require('./json-data/iso_639-2.json');
 
 const app = express();
 const port = process.env['PORT'];
@@ -49,6 +50,11 @@ app.get('/', (req, res) => {
 // Returns the json file containing the countries
 app.get('/countries/', (req, res) => {
   res.json(countries);
+});
+
+// Returns the json file containing all the different languages
+app.get('/languages/', (req, res) => {
+  res.json(languages);
 });
 
 app.get('/about', function (req, res) {
