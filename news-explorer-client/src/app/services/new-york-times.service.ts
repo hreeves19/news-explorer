@@ -14,6 +14,6 @@ export class NewYorkTimesService {
   ) { }
 
   getAllHeadlines() {
-    return this.http.get(`${environment.expressServerName}newyorktimesHeadlines/`);
+    return this.http.get(`${environment.expressServerName}headlines/`);
   }
 }

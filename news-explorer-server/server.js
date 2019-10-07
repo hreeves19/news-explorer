@@ -39,9 +39,9 @@ app.use(bodyParser.urlencoded());
 // in latest body-parser use like below.
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use('/newyorktimesHeadlines', newYorkTimesRoute);
-app.use('/guardianHeadlines', guardianRoute);
-app.use('/googleHeadlines', googleRoute);
+app.use('/newyorktimes', newYorkTimesRoute);
+app.use('/guardian', guardianRoute);
+app.use('/google', googleRoute);
 
 app.get('/', (req, res) => {
   res.send('\n\nHello, world dawgggg!\n\n');

@@ -14,6 +14,6 @@ export class GuardianService {
   ) { }
 
   getAllHeadlines() {
-    return this.http.get(`${environment.expressServerName}guardianHeadlines/`);
+    return this.http.get(`${environment.expressServerName}headlines/`);
   }
 }

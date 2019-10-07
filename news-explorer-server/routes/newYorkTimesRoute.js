@@ -18,7 +18,7 @@ let newYorkTimesSearch = {
 };
 
 // Get all events
-routes.get('/', async (req, res) => {
+routes.get('/headlines', async (req, res) => {
     request(`${externalRouteNewYorkTimes}?api-key=${newYorkTimesAPIKey}`, function (error, response, body) {
       res.json(body)
     });

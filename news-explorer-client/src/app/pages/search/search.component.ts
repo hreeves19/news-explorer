@@ -4,7 +4,7 @@ import { GoogleNewsService } from 'src/app/services/google-news.service';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import { FormControl, FormGroup } from '@angular/forms';
-import { GoogleNews } from '../../interfaces/google-news';
+import { SearchNews } from 'src/app/classes/search-news';
 
 @Component({
   selector: 'app-search',
@@ -14,6 +14,8 @@ import { GoogleNews } from '../../interfaces/google-news';
 export class SearchComponent implements OnInit {
 
   countries: any;
+  searchNews: SearchNews;
+
   newsSources = [
     {name: "All", value: -1},
     {name: "Google News", value: 1},
@@ -23,9 +25,10 @@ export class SearchComponent implements OnInit {
 
   constructor(
     private countryService: CountryService,
-    private googleNewsService: GoogleNewsService,
-    private searchGoogle: GoogleNews
-  ) { }
+    private googleNewsService: GoogleNewsService
+  ) {
+    this.searchNews = new SearchNews(this.googleNewsService);
+  }
 
   searchForm = new FormGroup( {
     keyWords: new FormControl(''),
@@ -60,5 +63,7 @@ export class SearchComponent implements OnInit {
 
   onSubmit() {
     console.log(this.searchForm.value);
+    this.searchNews.getHeadlines();
+    this.searchNews.searchHeadlines(this.searchNews.googleNews);
   }
 }

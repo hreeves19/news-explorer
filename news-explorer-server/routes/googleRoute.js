@@ -10,13 +10,17 @@ let googleSearch = {
 };
 
 // Get all events
-routes.get('/', async (req, res) => {
+routes.get('/headlines', async (req, res) => {
     newsapi.v2.topHeadlines({
       language: 'en',
       country: 'us'
     }).then(response => {
       res.json(response);
     });
+});
+
+routes.post('/searchHeadlines', (req, res) => {
+  res.json(req.body);
 });
 
 module.exports = routes;
