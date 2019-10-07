@@ -3,7 +3,7 @@ import { CountryService } from 'src/app/services/country.service';
 import { GoogleNewsService } from 'src/app/services/google-news.service';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
-import { FormControl } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-search',
@@ -25,14 +25,17 @@ export class SearchComponent implements OnInit {
     private googleNewsService: GoogleNewsService
   ) { }
 
-  keyWords = new FormControl('');
-  source = new FormControl(this.newsSources[0].value);
-  title = new FormControl('');
-  from = new FormControl(new Date());
-  to = new FormControl(new Date());
-  language = new FormControl();
-  listOfCountries = new FormControl(new Array());
-  sortBy = new FormControl();
+  searchForm = new FormGroup( {
+    keyWords: new FormControl(''),
+    source: new FormControl(this.newsSources[0].value),
+    title: new FormControl(''),
+    from: new FormControl(new Date()),
+    to: new FormControl(new Date()),
+    language: new FormControl(),
+    listOfCountries: new FormControl(new Array()),
+    sortBy: new FormControl()
+  });
+
 
   ngOnInit() {
     this.countryService.getAllCountries().subscribe(
@@ -44,11 +47,16 @@ export class SearchComponent implements OnInit {
           return item.Code === 'US';
         });
 
-        this.listOfCountries.setValue(new Array(us.Code));
+        // this.searchForm.listOfCountries.setValue(new Array(us.Code));
+        this.searchForm.controls['listOfCountries'].setValue(new Array(us.Code));
       },
       (error) => {
         console.log(error);
       }
     );
+  }
+
+  onSubmit() {
+
   }
 }

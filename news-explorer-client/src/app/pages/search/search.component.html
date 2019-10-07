@@ -3,7 +3,7 @@
     <h1>Advanced Search</h1>
   </mat-toolbar-row>
 </mat-toolbar>
-<form>
+<form [formGroup]="searchForm" (ngSubmit)="onSubmit()">
     <mat-card class="search-card">
       <mat-card-header>
         <mat-card-title>News - Advanced Search</mat-card-title>
@@ -14,7 +14,7 @@
             <!-- News Source -->
             <mat-form-field>
               <mat-label>News Sources</mat-label>
-              <mat-select [formControl]="source">
+              <mat-select formControlName="source">
                 <mat-option *ngFor="let source of newsSources" [value]="source.value">
                   {{source.name}}
                 </mat-option>
@@ -23,7 +23,7 @@
             <!-- Countries -->
             <mat-form-field>
               <mat-label>Countries</mat-label>
-              <mat-select [formControl]=listOfCountries multiple>
+              <mat-select formControlName=listOfCountries multiple>
                 <mat-option *ngFor="let country of countries" [value]="country.Code">
                   {{country.Name}}
                 </mat-option>
@@ -33,21 +33,21 @@
           <div class="flex-group">
             <!-- Key Words -->
             <mat-form-field>
-              <input matInput placeholder="Keywords" [formControl]="keyWords">
+              <input matInput placeholder="Keywords" formControlName="keyWords">
             </mat-form-field>
             <!-- Article Title -->
             <mat-form-field>
-              <input matInput placeholder="Keywords in Title" [formControl]="title">
+              <input matInput placeholder="Keywords in Title" formControlName="title">
             </mat-form-field>
             <!-- From -->
             <mat-form-field>
-              <input matInput [matDatepicker]="fromDate" placeholder="From" [formControl]="from">
+              <input matInput [matDatepicker]="fromDate" placeholder="From" formControlName="from">
               <mat-datepicker-toggle matSuffix [for]="fromDate"></mat-datepicker-toggle>
               <mat-datepicker #fromDate></mat-datepicker>
             </mat-form-field>
             <!-- From -->
             <mat-form-field>
-              <input matInput [matDatepicker]="toDate" placeholder="To" [formControl]="to">
+              <input matInput [matDatepicker]="toDate" placeholder="To" formControlName="to">
               <mat-datepicker-toggle matSuffix [for]="toDate"></mat-datepicker-toggle>
               <mat-datepicker #toDate></mat-datepicker>
             </mat-form-field>
