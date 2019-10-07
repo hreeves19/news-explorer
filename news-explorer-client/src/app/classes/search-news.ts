@@ -44,4 +44,9 @@ export class SearchNews {
       }
     );
   }
+
+  public mapGoogleSearch(formData: any) {
+    console.log(formData);
+    console.log(this.googleNews);
+  }
 }

@@ -20,12 +20,30 @@
                 </mat-option>
               </mat-select>
             </mat-form-field>
-            <!-- Countries -->
+            <!-- Country -->
             <mat-form-field>
-              <mat-label>Countries</mat-label>
-              <mat-select formControlName=listOfCountries multiple>
+              <mat-label>Country</mat-label>
+              <mat-select formControlName=country>
                 <mat-option *ngFor="let country of countries" [value]="country.Code">
                   {{country.Name}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <!-- Language -->
+            <mat-form-field>
+              <mat-label>Language</mat-label>
+              <mat-select formControlName=language>
+                <mat-option *ngFor="let language of languages" [value]="language.value">
+                  {{language.name}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <!-- Sort by -->
+            <mat-form-field>
+              <mat-label>Sort By</mat-label>
+              <mat-select formControlName=sortBy>
+                <mat-option *ngFor="let sort of sorts" [value]="sort.value">
+                  {{sort.name}}
                 </mat-option>
               </mat-select>
             </mat-form-field>

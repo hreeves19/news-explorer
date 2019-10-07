@@ -20,4 +20,23 @@ export class CountryService {
   getAllLanguages() {
     return this.http.get(`${environment.expressServerName}languages/`);
   }
+
+  filterLanguages(languages: any) {
+    let filtered = new Array();
+    for (let [key, value] of Object.entries(languages)) {
+
+      let itemKeys = Object.keys(value);
+
+      let englishPosition = itemKeys.indexOf('en');
+      let code = itemKeys.indexOf('639-2');
+
+      if(code === -1 || englishPosition === -1) {
+        continue;
+      }
+
+      filtered.push({name: value[itemKeys[englishPosition]][0], value: value[itemKeys[code]]});
+    }
+
+    return filtered;
+  }
 }

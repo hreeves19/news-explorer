@@ -20,7 +20,9 @@ routes.get('/headlines', async (req, res) => {
 });
 
 routes.post('/searchHeadlines', (req, res) => {
-  res.json(req.body);
+  newsapi.v2.topHeadlines(req.body).then(response => {
+    res.json(response);
+  });
 });
 
 module.exports = routes;
