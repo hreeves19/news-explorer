@@ -4,7 +4,7 @@ const NewsAPI = require('newsapi');
 const googleNewsKey = process.env['GOOGLE_NEWS_API_KEY'];
 const newsapi = new NewsAPI(googleNewsKey);
 
-// https://developer.nytimes.com/docs/articlesearch-product/1/routes/articlesearch.json/get
+// https://newsapi.org/docs/endpoints/everything
 let googleSearch = {
     
 };

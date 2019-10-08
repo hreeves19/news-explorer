@@ -9,4 +9,5 @@ export interface GoogleNews {
   language: null;
   pageSize: null;
   page: null;
+  sortBy: null;
 }

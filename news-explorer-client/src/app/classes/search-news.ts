@@ -5,6 +5,14 @@ import { take } from 'rxjs/operators';
 
 export class SearchNews {
   googleNews: GoogleNews;
+  searchMapping = [
+    {form: "keyWords", local: "q"},
+    {form: "title", local: "qInTitle"},
+    {form: "from", local: "from"},
+    {form: "to", local: "to"},
+    {form: "language", local: "language"},
+    {form: "sortBy", local: "sortBy"}
+  ];
 
   constructor(
     private googleNewsService: GoogleNewsService
@@ -19,7 +27,8 @@ export class SearchNews {
       to: null,
       language: null,
       pageSize: null,
-      page: null
+      page: null,
+      sortBy: null
     };
   }
 
@@ -34,7 +43,7 @@ export class SearchNews {
     );
   }
 
-  public searchHeadlines(search: GoogleNews) {
+  public searchHeadlines(search: any) {
     this.googleNewsService.searchHeadlines(search).pipe(take(1)).subscribe(
       (result) => {
         console.log(result);
@@ -46,7 +55,24 @@ export class SearchNews {
   }
 
   public mapGoogleSearch(formData: any) {
-    console.log(formData);
-    console.log(this.googleNews);
+    formData = this.clean(formData); // Removing nulls and empty quotes
+  }
+
+  public clean(obj: any) {
+    for (let propName in obj) {
+      if (obj[propName] === null || obj[propName] === undefined || obj[propName] === "") {
+        delete obj[propName];
+      }
+    }
+
+    return obj;
+  }
+
+  public filterObjects(object, filter) {
+    let keys = Object.keys(object);
+
+    keys.forEach(element => {
+
+    });
   }
 }

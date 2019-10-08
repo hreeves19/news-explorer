@@ -3,7 +3,7 @@ const request = require('request');
 const externalRouteGaurdian = process.env['GUARDIAN_EXTERNAL_ROUTE'];
 const gaurdianKey = process.env['GUARDIAN_API_KEY'];
 
-// https://developer.nytimes.com/docs/articlesearch-product/1/routes/articlesearch.json/get
+// https://english.api.rakuten.net/mikilior1/api/Guardian/details
 let guardianSearch = {
     
 };

@@ -88,7 +88,6 @@ export class SearchComponent implements OnInit {
 
   onSubmit() {
     console.log(this.searchForm.value);
-    this.searchNews.getHeadlines();
-    this.searchNews.searchHeadlines(this.searchNews.googleNews);
+    this.searchNews.mapGoogleSearch(this.searchForm.value);
   }
 }
