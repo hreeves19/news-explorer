@@ -44,7 +44,6 @@ export class SearchNews {
   }
 
   public searchHeadlines(search: any) {
-    console.log(search);
     this.googleNewsService.searchHeadlines(search).pipe(take(1)).subscribe(
       (result) => {
         console.log(result);

@@ -38,7 +38,6 @@ export class CountryService {
     }
 
     filtered.sort(this.compare);
-    console.log(filtered);
     return filtered;
   }
 
