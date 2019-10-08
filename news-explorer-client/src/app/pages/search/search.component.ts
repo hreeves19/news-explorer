@@ -3,7 +3,7 @@ import { CountryService } from 'src/app/services/country.service';
 import { GoogleNewsService } from 'src/app/services/google-news.service';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { SearchNews } from 'src/app/classes/search-news';
 import { take } from 'rxjs/operators';
 
@@ -17,6 +17,8 @@ export class SearchComponent implements OnInit {
   countries: any;
   languages: any;
   searchNews: SearchNews;
+  maxDate: Date = new Date();
+  minDate: Date = new Date();
 
   newsSources = [
     {name: "All", value: -1},
@@ -35,6 +37,7 @@ export class SearchComponent implements OnInit {
     private countryService: CountryService,
     private googleNewsService: GoogleNewsService
   ) {
+    this.minDate.setMonth(this.minDate.getMonth() - 1);
     this.searchNews = new SearchNews(this.googleNewsService);
   }
 
@@ -42,7 +45,7 @@ export class SearchComponent implements OnInit {
     keyWords: new FormControl(''),
     source: new FormControl(this.newsSources[0].value),
     title: new FormControl(''),
-    from: new FormControl(new Date()),
+    from: new FormControl(this.minDate),
     to: new FormControl(new Date()),
     language: new FormControl(),
     country: new FormControl(),
@@ -74,7 +77,7 @@ export class SearchComponent implements OnInit {
 
         // Getting english code
         let english = this.languages.find(item => {
-          return item.value === 'eng';
+          return item.value === 'en';
         });
 
         // Setting the form control
@@ -86,8 +89,12 @@ export class SearchComponent implements OnInit {
     );
   }
 
+  isValidDate() {
+    return true;
+  }
+
   onSubmit() {
-    console.log(this.searchForm.value);
-    this.searchNews.mapGoogleSearch(this.searchForm.value);
+    let search = this.searchNews.mapGoogleSearch(this.searchForm.value);
+    this.searchNews.searchHeadlines(search);
   }
 }

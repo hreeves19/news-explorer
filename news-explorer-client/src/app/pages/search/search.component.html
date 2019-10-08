@@ -59,13 +59,13 @@
             </mat-form-field>
             <!-- From -->
             <mat-form-field>
-              <input matInput [matDatepicker]="fromDate" placeholder="From" formControlName="from">
+              <input matInput [matDatepicker]="fromDate" placeholder="From" formControlName="from" [(max)]="maxDate" [(min)]="minDate">
               <mat-datepicker-toggle matSuffix [for]="fromDate"></mat-datepicker-toggle>
               <mat-datepicker #fromDate></mat-datepicker>
             </mat-form-field>
             <!-- to -->
             <mat-form-field>
-              <input matInput [matDatepicker]="toDate" placeholder="To" formControlName="to">
+              <input matInput [matDatepicker]="toDate" placeholder="To" formControlName="to" [(max)]="maxDate" [(min)]="minDate">
               <mat-datepicker-toggle matSuffix [for]="toDate"></mat-datepicker-toggle>
               <mat-datepicker #toDate></mat-datepicker>
             </mat-form-field>

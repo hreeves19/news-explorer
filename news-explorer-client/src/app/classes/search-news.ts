@@ -44,6 +44,7 @@ export class SearchNews {
   }
 
   public searchHeadlines(search: any) {
+    console.log(search);
     this.googleNewsService.searchHeadlines(search).pipe(take(1)).subscribe(
       (result) => {
         console.log(result);
@@ -56,6 +57,7 @@ export class SearchNews {
 
   public mapGoogleSearch(formData: any) {
     formData = this.clean(formData); // Removing nulls and empty quotes
+    return this.filterObjects(formData, this.mapGoogleSearch);
   }
 
   public clean(obj: any) {
@@ -70,9 +72,29 @@ export class SearchNews {
 
   public filterObjects(object, filter) {
     let keys = Object.keys(object);
+    let filterKeys = Object.keys(filter);
+    let filtered = {};
 
     keys.forEach(element => {
-
+      console.log(element);
+      this.searchMapping.forEach(searchItem => {
+        if(searchItem.form === element) {
+          if(object[element] instanceof Date) {
+            object[element] = this.googleDate(object[element]);
+          }
+          filtered[searchItem.local] = object[element];
+        }
+      });
     });
+
+    return filtered;
+  }
+
+  public googleDate(date: Date) {
+    const month = date.getUTCMonth() + 1; //months from 1-12
+    const day = date.getUTCDate();
+    const year = date.getUTCFullYear();
+
+    return `${year}-${month}-${day}`;
   }
 }

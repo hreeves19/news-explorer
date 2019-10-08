@@ -23,12 +23,12 @@ export class CountryService {
 
   filterLanguages(languages: any) {
     let filtered = new Array();
-    for (let [key, value] of Object.entries(languages)) {
 
+    for (let [key, value] of Object.entries(languages)) {
       let itemKeys = Object.keys(value);
 
       let englishPosition = itemKeys.indexOf('en');
-      let code = itemKeys.indexOf('639-2');
+      let code = itemKeys.indexOf('639-1');
 
       if(code === -1 || englishPosition === -1) {
         continue;
@@ -37,6 +37,18 @@ export class CountryService {
       filtered.push({name: value[itemKeys[englishPosition]][0], value: value[itemKeys[code]]});
     }
 
+    filtered.sort(this.compare);
+    console.log(filtered);
     return filtered;
+  }
+
+    compare( a, b ) {
+    if ( a.name < b.name ) {
+      return -1;
+    }
+    if ( a.name > b.name ) {
+      return 1;
+    }
+    return 0;
   }
 }
