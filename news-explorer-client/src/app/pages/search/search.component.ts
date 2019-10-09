@@ -6,6 +6,7 @@ import {MatSort} from '@angular/material/sort';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { SearchNews } from 'src/app/classes/search-news';
 import { take } from 'rxjs/operators';
+import { NewYorkTimesService } from 'src/app/services/new-york-times.service';
 
 @Component({
   selector: 'app-search',
@@ -19,6 +20,8 @@ export class SearchComponent implements OnInit {
   searchNews: SearchNews;
   maxDate: Date = new Date();
   minDate: Date = new Date();
+  isLoaded = false;
+  searchResults = 0;
 
   newsSources = [
     {name: "All", value: -1},
@@ -35,7 +38,8 @@ export class SearchComponent implements OnInit {
 
   constructor(
     private countryService: CountryService,
-    private googleNewsService: GoogleNewsService
+    private googleNewsService: GoogleNewsService,
+    private newYorkTimesService: NewYorkTimesService
   ) {
     this.minDate.setMonth(this.minDate.getMonth() - 1);
     this.searchNews = new SearchNews(this.googleNewsService);
@@ -93,8 +97,41 @@ export class SearchComponent implements OnInit {
     return true;
   }
 
-  onSubmit() {
-    let search = this.searchNews.mapGoogleSearch(this.searchForm.value);
-    this.searchNews.searchHeadlines(search);
+  async onSubmit() {
+    this.searchResults = 0;
+    this.searchGoogleHeadlines(this.searchNews.mapGoogleSearch(this.searchForm.value)); // Search Google
+  }
+
+  searchGoogleHeadlines(search: any) {
+    console.log(search);
+    this.googleNewsService.searchHeadlines(search).pipe(take(1)).subscribe(
+      (result) => {
+        console.log(result);
+        this.searchNews.googleNews = result["articles"];
+        this.searchResults += result['totalResults'];
+        // Search New York
+        this.searchNewYorkTimes(this.searchNews.mapNewYorkTimes(this.searchForm.value));
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
+  }
+
+  searchNewYorkTimes(search: any) {
+    console.log(search);
+    this.newYorkTimesService.searchArticles(search).pipe(take(1)).subscribe(
+      (result) => {
+        console.log(result);
+        this.isLoaded = true;
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
+  }
+
+  resetContentHeight() {
+    let main = document.getElementById('mainContent');
   }
 }

@@ -20,8 +20,30 @@ let newYorkTimesSearch = {
 // Get all events
 routes.get('/headlines', async (req, res) => {
     request(`${externalRouteNewYorkTimes}?api-key=${newYorkTimesAPIKey}`, function (error, response, body) {
-      res.json(body)
+      res.json(body);
     });
 });
+
+// Search articles
+routes.post('/search', (req, res) => {
+  let search = req.body;
+  search = parameterizeObject(search);
+
+  request(`${externalRouteNewYorkTimes}?api-key=${newYorkTimesAPIKey}&${search}`, function (error, response, body) {
+    res.send(body);
+  });
+});
+
+function parameterizeObject(obj) {
+  var str = "";
+  for (var key in obj) {
+      if (str != "") {
+          str += "&";
+      }
+      str += key + "=" + encodeURIComponent(obj[key]);
+  }
+
+  return str;
+}
 
 module.exports = routes;
