@@ -3,10 +3,12 @@ import { GoogleNewsService } from '../services/google-news.service';
 import { pipe } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { NewYorkTimesSearch } from '../interfaces/new-york-times-search';
+import { GuardianSearch } from '../interfaces/guardian-search';
 
 export class SearchNews {
   googleNews: any;
   newYorkTimesSearch: NewYorkTimesSearch;
+  gaurdianSearch: GuardianSearch;
   googleTotal = 0;
   searchMappingGoogle = [
     {form: "keyWords", local: "q"},
@@ -20,6 +22,12 @@ export class SearchNews {
     {form: "keyWords", local: "q"},
     {form: "from", local: "begin_date"},
     {form: "to", local: "end_date"}
+  ];
+  searchGaurdianMapping = [
+    {form: "keyWords", local: "q"},
+    {form: "from", local: "from_date"},
+    {form: "to", local: "to_date"},
+    {form: "language", local: "lang"},
   ];
 
   constructor(
@@ -52,6 +60,18 @@ export class SearchNews {
       sort: "" // Can either be: newest; oldest; relevance
     };
     this.newYorkTimesSearch.sort = 'relevance'; // Always sort by relevance
+
+    this.gaurdianSearch = {
+      format: 'json', // json or xml
+      q: '', // query user writes
+      section: '',
+      tag: '',
+      lang: '', // Languages: en fr
+      'star-rating': null,
+      'order-by': 'newest', // newest (default), oldest, relevance
+      'to-date': '',
+      'from-date': ''
+    }
   }
 
   public getHeadlines() {
@@ -74,6 +94,11 @@ export class SearchNews {
   public mapNewYorkTimes(formData: any) {
     formData = this.clean(formData); // Removing nulls and empty quotes
     return this.fixDate(this.filterObjects(formData, this.searchMappingNewYorkTimes), 2);
+  }
+
+  public mapGaurdian(formData: any) {
+    formData = this.clean(formData);
+    return this.fixDate(this.filterObjects(formData, this.searchGaurdianMapping), 1);
   }
 
   public clean(obj: any) {

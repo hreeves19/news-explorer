@@ -16,4 +16,8 @@ export class GuardianService {
   getAllHeadlines() {
     return this.http.get(`${environment.expressServerName}headlines/`);
   }
+
+  search(search: any) {
+    return this.http.post(`${environment.expressServerName}guardian/search`, search);
+  }
 }

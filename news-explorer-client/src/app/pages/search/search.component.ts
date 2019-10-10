@@ -7,6 +7,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { SearchNews } from 'src/app/classes/search-news';
 import { take } from 'rxjs/operators';
 import { NewYorkTimesService } from 'src/app/services/new-york-times.service';
+import { GuardianService } from 'src/app/services/guardian.service';
 
 @Component({
   selector: 'app-search',
@@ -39,7 +40,8 @@ export class SearchComponent implements OnInit {
   constructor(
     private countryService: CountryService,
     private googleNewsService: GoogleNewsService,
-    private newYorkTimesService: NewYorkTimesService
+    private newYorkTimesService: NewYorkTimesService,
+    private guardianService: GuardianService
   ) {
     this.minDate.setMonth(this.minDate.getMonth() - 1);
     this.searchNews = new SearchNews(this.googleNewsService);
@@ -121,6 +123,18 @@ export class SearchComponent implements OnInit {
   searchNewYorkTimes(search: any) {
     console.log(search);
     this.newYorkTimesService.searchArticles(search).pipe(take(1)).subscribe(
+      (result) => {
+        console.log(result);
+        this.searchGuardian(this.searchForm.value);
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
+  }
+
+  searchGuardian(search: any) {
+    this.guardianService.search(search).pipe(take(1)).subscribe(
       (result) => {
         console.log(result);
         this.isLoaded = true;
