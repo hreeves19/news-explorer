@@ -16,6 +16,7 @@ import { GoogleNewsModule } from './tables/google-news/google-news.module';
 import { GuardianService } from './services/guardian.service';
 import { NewYorkTimesService } from './services/new-york-times.service';
 import { FormsModule } from '@angular/forms';
+import { GlobalTableModule } from './tables/global-table/global-table.module';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { FormsModule } from '@angular/forms';
     MatCardModule,
     MatInputModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    GlobalTableModule
   ],
   providers: [GoogleNewsService, CountryService, GuardianService, NewYorkTimesService, MatDatepickerModule],
   bootstrap: [AppComponent]

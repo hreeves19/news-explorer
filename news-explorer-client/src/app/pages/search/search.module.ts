@@ -5,6 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SearchComponent } from './search.component';
 import { GoogleNewsComponent } from '../../tables/google-news/google-news.component';
 import { GoogleNewsModule } from 'src/app/tables/google-news/google-news.module';
+import { GlobalTableModule } from 'src/app/tables/global-table/global-table.module';
 
 
 
@@ -26,7 +27,8 @@ import { GoogleNewsModule } from 'src/app/tables/google-news/google-news.module'
     MatButtonModule,
     MatSelectModule,
     ReactiveFormsModule,
-    MatDatepickerModule
+    MatDatepickerModule,
+    GlobalTableModule
   ]
 })
 export class SearchModule { }

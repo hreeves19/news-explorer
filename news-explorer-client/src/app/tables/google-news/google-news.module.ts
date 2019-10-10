@@ -12,6 +12,6 @@ import { MatTableModule, MatButtonModule } from '@angular/material';
     MatTableModule,
     MatButtonModule
   ],
-  exports:[GoogleNewsComponent]
+  exports: [GoogleNewsComponent]
 })
 export class GoogleNewsModule { }
