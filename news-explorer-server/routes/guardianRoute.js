@@ -17,4 +17,25 @@ routes.get('/headlines', async (req, res) => {
     });
 });
 
+routes.post('/search', (req, res) => {
+  let search = parameterizeObject(req.body);
+  request(`${externalRouteGaurdian}?api-key=${gaurdianKey}&${search}`, function (error, response, body) {
+    // console.log('error:', error); // Print the error if one occurred and handle it
+    //console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
+    res.json(body)
+  });
+});
+
+function parameterizeObject(obj) {
+  var str = "";
+  for (var key in obj) {
+      if (str != "") {
+          str += "&";
+      }
+      str += key + "=" + encodeURIComponent(obj[key]);
+  }
+
+  return str;
+}
+
 module.exports = routes;
