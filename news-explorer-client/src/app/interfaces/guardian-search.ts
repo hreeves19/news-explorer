@@ -10,3 +10,15 @@ export interface GuardianSearch {
   'to-date': string;
   'from-date': string;
 }
+
+// apiUrl: "https://content.guardianapis.com/us-news/2019/oct/04/should-trump-be-banned-from-twitter"
+// id: "us-news/2019/oct/04/should-trump-be-banned-from-twitter"
+// isHosted: false
+// pillarId: "pillar/news"
+// pillarName: "News"
+// sectionId: "us-news"
+// sectionName: "US news"
+// type: "article"
+// webPublicationDate: "2019-10-04T06:00:15Z"
+// webTitle: "Should Trump be banned from Twitter? | Arwa Mahdawi"
+// webUrl: "https://www.theguardian.com/us-news/2019/oct/04/should-trump-be-banned-from-twitter"

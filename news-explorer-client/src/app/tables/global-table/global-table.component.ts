@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-global-table',
@@ -6,10 +6,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./global-table.component.scss']
 })
 export class GlobalTableComponent implements OnInit {
-
-  constructor() { }
+  @Input() googleNews;
+  @Input() guardian;
+  @Input() newYorkTimes;
+  constructor() {
+  }
 
   ngOnInit() {
+    console.log(this.googleNews);
+    console.log(this.guardian);
+    console.log(this.newYorkTimes);
   }
 
 }

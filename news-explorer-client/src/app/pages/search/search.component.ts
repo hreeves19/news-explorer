@@ -24,6 +24,9 @@ export class SearchComponent implements OnInit {
   isLoaded = false;
   isSearching = false;
   searchResults = 0;
+  googleNews: any;
+  guardian: any;
+  newYorkTimes: any;
 
   newsSources = [
     {name: "All", value: -1},
@@ -49,7 +52,7 @@ export class SearchComponent implements OnInit {
   }
 
   searchForm = new FormGroup( {
-    keyWords: new FormControl('', [Validators.required]),
+    keyWords: new FormControl('Trump', [Validators.required]),
     source: new FormControl(this.newsSources[0].value),
     title: new FormControl(''),
     from: new FormControl(this.minDate),
@@ -110,10 +113,8 @@ export class SearchComponent implements OnInit {
   searchGoogleHeadlines(search: any) {
     this.googleNewsService.searchHeadlines(search).pipe(take(1)).subscribe(
       (result) => {
-        console.log(search);
-        console.log(result);
-        this.searchNews.googleNews = result["articles"];
-        this.searchResults += result['totalResults'];
+        // this.searchResults += result['totalResults'];
+        this.googleNews = result;
         // Search New York
         this.searchNewYorkTimes(this.searchNews.mapNewYorkTimes(this.searchForm.value));
       },
@@ -127,8 +128,7 @@ export class SearchComponent implements OnInit {
     console.log(search);
     this.newYorkTimesService.searchArticles(search).pipe(take(1)).subscribe(
       (result) => {
-        console.log(result);
-        console.log(this.searchNews.mapGaurdian(this.searchForm.value));
+        this.newYorkTimes = result;
         this.searchGuardian(this.searchNews.mapGaurdian(this.searchForm.value));
       },
       (error) => {
@@ -140,7 +140,7 @@ export class SearchComponent implements OnInit {
   searchGuardian(search: any) {
     this.guardianService.search(search).pipe(take(1)).subscribe(
       (result) => {
-        console.log(result);
+        this.guardian = result;
         this.isLoaded = true;
         this.isSearching = false;
       },
