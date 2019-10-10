@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { CountryService } from 'src/app/services/country.service';
 import { GoogleNewsService } from 'src/app/services/google-news.service';
 import {MatPaginator} from '@angular/material/paginator';
@@ -22,6 +22,7 @@ export class SearchComponent implements OnInit {
   maxDate: Date = new Date();
   minDate: Date = new Date();
   isLoaded = false;
+  isSearching = false;
   searchResults = 0;
 
   newsSources = [
@@ -48,7 +49,7 @@ export class SearchComponent implements OnInit {
   }
 
   searchForm = new FormGroup( {
-    keyWords: new FormControl(''),
+    keyWords: new FormControl('', [Validators.required]),
     source: new FormControl(this.newsSources[0].value),
     title: new FormControl(''),
     from: new FormControl(this.minDate),
@@ -95,19 +96,21 @@ export class SearchComponent implements OnInit {
     );
   }
 
-  isValidDate() {
-    return true;
-  }
-
   async onSubmit() {
+    if (!this.searchForm.valid) {
+      return;
+    }
+
+    this.isSearching = true;
     this.searchResults = 0;
+
     this.searchGoogleHeadlines(this.searchNews.mapGoogleSearch(this.searchForm.value)); // Search Google
   }
 
   searchGoogleHeadlines(search: any) {
-    console.log(search);
     this.googleNewsService.searchHeadlines(search).pipe(take(1)).subscribe(
       (result) => {
+        console.log(search);
         console.log(result);
         this.searchNews.googleNews = result["articles"];
         this.searchResults += result['totalResults'];
@@ -125,7 +128,8 @@ export class SearchComponent implements OnInit {
     this.newYorkTimesService.searchArticles(search).pipe(take(1)).subscribe(
       (result) => {
         console.log(result);
-        this.searchGuardian(this.searchForm.value);
+        console.log(this.searchNews.mapGaurdian(this.searchForm.value));
+        this.searchGuardian(this.searchNews.mapGaurdian(this.searchForm.value));
       },
       (error) => {
         console.error(error);
@@ -138,6 +142,7 @@ export class SearchComponent implements OnInit {
       (result) => {
         console.log(result);
         this.isLoaded = true;
+        this.isSearching = false;
       },
       (error) => {
         console.error(error);

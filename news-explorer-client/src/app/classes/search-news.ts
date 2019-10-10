@@ -25,8 +25,8 @@ export class SearchNews {
   ];
   searchGaurdianMapping = [
     {form: "keyWords", local: "q"},
-    {form: "from", local: "from_date"},
-    {form: "to", local: "to_date"},
+    {form: "from", local: "from-date"},
+    {form: "to", local: "to-date"},
     {form: "language", local: "lang"},
   ];
 
@@ -158,12 +158,12 @@ export class SearchNews {
     const day = date.getUTCDate();
     const year = date.getUTCFullYear();
 
-    return `${year}-${month}-${day}`;
+    return `${this.addZero(year)}-${this.addZero(month)}-${this.addZero(day)}`;
   }
 
   public newYorkTimesDate(date: Date) {
     const month = date.getUTCMonth() + 1;
-    const day = date.getUTCDay();
+    const day = date.getUTCDate();
     const year = date.getUTCFullYear();
 
     return `${this.addZero(year)}${this.addZero(month)}${this.addZero(day)}`;

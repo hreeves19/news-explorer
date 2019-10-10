@@ -18,6 +18,6 @@ export class GoogleNewsService {
   }
 
   searchHeadlines(search: any) {
-    return this.http.post(`${environment.expressServerName}google/searchHeadlines`, search);
+    return this.http.post(`${environment.expressServerName}google/search`, search);
   }
 }

@@ -19,10 +19,11 @@ routes.get('/headlines', async (req, res) => {
 
 routes.post('/search', (req, res) => {
   let search = parameterizeObject(req.body);
+  console.log(search);
   request(`${externalRouteGaurdian}?api-key=${gaurdianKey}&${search}`, function (error, response, body) {
     // console.log('error:', error); // Print the error if one occurred and handle it
     //console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
-    res.json(body)
+    res.send(body)
   });
 });
 

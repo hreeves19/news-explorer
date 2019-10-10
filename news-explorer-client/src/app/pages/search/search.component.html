@@ -76,12 +76,12 @@
       </mat-card-content>
       <mat-card-actions>
         <button mat-raised-button color="secondary">Clear</button>
-        <button mat-raised-button color="primary" type="submit" [(disabled)]="isLoaded">Search</button>
+        <button mat-raised-button color="primary" type="submit" [(disabled)]="isSearching">Search</button>
       </mat-card-actions>
     </mat-card>
 </form>
 
-<!-- <mat-card *ngIf="isLoaded" class="all-news-card">
+<mat-card *ngIf="isLoaded" class="all-news-card">
   <mat-card-header>
     <mat-card-title>Total Results: {{searchResults}}</mat-card-title>
   </mat-card-header>
@@ -92,4 +92,4 @@
       </mat-card-header>
     </mat-card>
   </mat-card-content>
-</mat-card> -->
+</mat-card>

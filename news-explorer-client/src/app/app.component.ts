@@ -7,9 +7,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'news-explorer-client';
-  height = window.innerHeight;
 
   constructor() {
-
+    console.log(document.getElementById('mainContent'));
   }
 }

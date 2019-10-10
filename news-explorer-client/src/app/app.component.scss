@@ -14,8 +14,10 @@
 
 .footer {
   position: absolute;
+  left: 0;
   bottom: 0;
   width: 100%;
+  overflow:hidden;
 }
 
 .secondary-nav {
@@ -24,8 +26,9 @@
 
 .main-container {
   padding-top: 4rem;
+  padding-bottom: 6rem;
   position: relative;
-  min-height: calc(100vh - 4rem);
+  min-height: calc(100vh - 10rem);
   width: 100%;
 }
 

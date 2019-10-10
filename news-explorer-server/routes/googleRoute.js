@@ -19,8 +19,8 @@ routes.get('/headlines', async (req, res) => {
     });
 });
 
-routes.post('/searchHeadlines', (req, res) => {
-  newsapi.v2.topHeadlines(req.body).then(response => {
+routes.post('/search', (req, res) => {
+  newsapi.v2.everything(req.body).then(response => {
     res.json(response);
   });
 });
