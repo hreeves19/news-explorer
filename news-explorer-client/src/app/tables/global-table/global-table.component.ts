@@ -11,8 +11,10 @@ export class GlobalTableComponent implements OnInit {
   @Input() guardian;
   @Input() newYorkTimes;
   shemaMatching: SchemaMatching = new SchemaMatching();
+  tableData = new Array();
 
-  displayColumns = ['ID', 'Title', 'Source', 'Published'];
+
+  displayedColumns = ['article_id', 'article_title', 'article_source', 'article_published_date'];
   constructor() {
   }
 
@@ -21,12 +23,10 @@ export class GlobalTableComponent implements OnInit {
     console.log(this.guardian);
     console.log(this.newYorkTimes);
     // Do Schema Mapping for all datasource
-    this.googleNews = this.shemaMatching.schemaMappingGoogle(this.googleNews.articles);
-    this.newYorkTimes = this.shemaMatching.schemaMappingNewYorkTimes(this.newYorkTimes.response.docs);
-    this.guardian = this.shemaMatching.schemaMappingGuardian(this.guardian.response.results);
-    console.log(this.googleNews);
-    console.log(this.newYorkTimes);
-    console.log(this.guardian);
+    this.tableData = this.tableData.concat(this.shemaMatching.schemaMappingGoogle(this.googleNews.articles));
+    this.tableData = this.tableData.concat(this.shemaMatching.schemaMappingNewYorkTimes(this.newYorkTimes.response.docs));
+    this.tableData = this.tableData.concat(this.shemaMatching.schemaMappingGuardian(this.guardian.response.results));
+    console.log(this.tableData);
   }
 
 }

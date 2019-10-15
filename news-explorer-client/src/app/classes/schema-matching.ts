@@ -11,8 +11,15 @@ export class SchemaMatching {
     article_title: null,
     article_source: null,
     article_web_url: null,
-    article_author_name: null
+    article_author_name: null,
+    article_local_schema_id: null
   };
+
+  localSchema = [
+    {local_schema_id: 1, local_schema_name: 'Google News'},
+    {local_schema_id: 2, local_schema_name: 'New York Times'},
+    {local_schema_id: 3, local_schema_name: 'The Guardian'}
+  ];
 
   filterGuardian = [
     {global: 'article_id', local: 'article_id'},
@@ -61,7 +68,8 @@ export class SchemaMatching {
         article_title: currentValue.title,
         article_source: currentValue.source.name,
         article_web_url: currentValue.url,
-        article_author_name: currentValue.author
+        article_author_name: currentValue.author,
+        article_local_schema_id: this.localSchema[0]
       };
     });
 
@@ -75,10 +83,11 @@ export class SchemaMatching {
         article_local_id: currentValue._id,
         article_section_name: currentValue.section_name,
         article_published_date: new Date(currentValue.pub_date),
-        article_title: currentValue.headline,
+        article_title: currentValue.headline.main,
         article_source: currentValue.source,
         article_web_url: currentValue.web_url,
-        article_author_name: currentValue.byline.original
+        article_author_name: currentValue.byline.original,
+        article_local_schema_id: this.localSchema[1]
       };
     });
 
@@ -108,7 +117,8 @@ export class SchemaMatching {
         article_title: currentValue.webTitle,
         article_source: currentValue.article_source,
         article_web_url: currentValue.webUrl,
-        article_author_name: result
+        article_author_name: result,
+        article_local_schema_id: this.localSchema[2]
       };
     });
 
