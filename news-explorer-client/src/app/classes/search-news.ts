@@ -11,23 +11,23 @@ export class SearchNews {
   gaurdianSearch: GuardianSearch;
   googleTotal = 0;
   searchMappingGoogle = [
-    {form: "keyWords", local: "q"},
-    {form: "title", local: "qInTitle"},
-    {form: "from", local: "from"},
-    {form: "to", local: "to"},
-    {form: "language", local: "language"},
-    {form: "sortBy", local: "sortBy"}
+    {form: 'keyWords', local: 'q'},
+    {form: 'title', local: 'qInTitle'},
+    {form: 'from', local: 'from'},
+    {form: 'to', local: 'to'},
+    {form: 'language', local: 'language'},
+    {form: 'sortBy', local: 'sortBy'}
   ];
   searchMappingNewYorkTimes = [
-    {form: "keyWords", local: "q"},
-    {form: "from", local: "begin_date"},
-    {form: "to", local: "end_date"}
+    {form: 'keyWords', local: 'q'},
+    {form: 'from', local: 'begin_date'},
+    {form: 'to', local: 'end_date'}
   ];
   searchGaurdianMapping = [
-    {form: "keyWords", local: "q"},
-    {form: "from", local: "from-date"},
-    {form: "to", local: "to-date"},
-    {form: "language", local: "lang"},
+    {form: 'keyWords', local: 'q'},
+    {form: 'from', local: 'from-date'},
+    {form: 'to', local: 'to-date'},
+    {form: 'language', local: 'lang'},
   ];
 
   constructor(
@@ -48,16 +48,16 @@ export class SearchNews {
     };
 
     this.newYorkTimesSearch = {
-      begin_date: "", //matches ^\d{8}$; Begin date (e.g. 20120101)
-      end_date: "",
-      facet: "", // True or false; shows facet count
-      facet_fields: "",
-      facet_filter: "",
-      f1: "",
-      fq: "",
+      begin_date: '', //matches ^\d{8}$; Begin date (e.g. 20120101)
+      end_date: '',
+      facet: '', // True or false; shows facet count
+      facet_fields: '',
+      facet_filter: '',
+      f1: '',
+      fq: '',
       page: null,// page number; integer between 0 <= value <= 100
-      q: "",
-      sort: "" // Can either be: newest; oldest; relevance
+      q: '',
+      sort: '' // Can either be: newest; oldest; relevance
     };
     this.newYorkTimesSearch.sort = 'relevance'; // Always sort by relevance
 
@@ -103,7 +103,7 @@ export class SearchNews {
 
   public clean(obj: any) {
     for (let propName in obj) {
-      if (obj[propName] === null || obj[propName] === undefined || obj[propName] === "") {
+      if (obj[propName] === null || obj[propName] === undefined || obj[propName] === '') {
         delete obj[propName];
       }
     }
