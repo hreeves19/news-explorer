@@ -22,9 +22,11 @@ export class GlobalTableComponent implements OnInit {
     console.log(this.newYorkTimes);
     // Do Schema Mapping for all datasource
     this.googleNews = this.shemaMatching.schemaMappingGoogle(this.googleNews.articles);
-    //this.newYorkTimes = this.shemaMatching.schemaMappingNewYorkTimes(this.newYorkTimes.response.docs);
+    this.newYorkTimes = this.shemaMatching.schemaMappingNewYorkTimes(this.newYorkTimes.response.docs);
+    this.guardian = this.shemaMatching.schemaMappingGuardian(this.guardian.response.results);
     console.log(this.googleNews);
     console.log(this.newYorkTimes);
+    console.log(this.guardian);
   }
 
 }

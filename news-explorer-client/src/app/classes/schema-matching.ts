@@ -52,32 +52,66 @@ export class SchemaMatching {
   }
 
   schemaMappingGoogle(googleNews: Array<any>) {
-    let temp = new Array(googleNews.length);
-
-    return googleNews.map((currentValue, index, obj) => {
-      let schema = this.globalSchema;
-      // Setting values
-      schema.article_id = index;
-      schema.article_local_id  = index;
-      schema.article_published_date = new Date(currentValue.publishedAt);
-      schema.article_source = currentValue.source.name;
-      schema.article_title = currentValue.title;
-      schema.article_web_url = currentValue.url;
-      schema.article_author_name = currentValue.author;
-      //this.autoIncrement++;
+    const news = googleNews.map((currentValue, index, obj) => {
+      return {
+        article_id: this.autoIncrement++,
+        article_local_id: null,
+        article_section_name: null,
+        article_published_date: new Date(currentValue.publishedAt),
+        article_title: currentValue.title,
+        article_source: currentValue.source.name,
+        article_web_url: currentValue.url,
+        article_author_name: currentValue.author
+      };
     });
+
+    return news;
   }
 
   schemaMappingNewYorkTimes(newYorkTimes: Array<any>) {
-    return newYorkTimes.map((currentValue, index, obj) => {
-      let schema = this.globalSchema;
-      console.log(currentValue);
-
-      schema.article_id = this.autoIncrement;
-      schema.article_local_id = currentValue._id;
-
-      this.autoIncrement++;
-      return schema;
+    const news = newYorkTimes.map((currentValue, index, obj) => {
+      return {
+        article_id: this.autoIncrement++,
+        article_local_id: currentValue._id,
+        article_section_name: currentValue.section_name,
+        article_published_date: new Date(currentValue.pub_date),
+        article_title: currentValue.headline,
+        article_source: currentValue.source,
+        article_web_url: currentValue.web_url,
+        article_author_name: currentValue.byline.original
+      };
     });
+
+    return news;
+  }
+
+  schemaMappingGuardian(guardian: Array<any>) {
+    const news = guardian.map((currentValue, index, obj) => {
+      const regex = /(\|\s\w+\s\w+)/gm;
+      const str = currentValue.webTitle;
+      let result = '';
+      let m;
+      m = regex.exec(str);
+
+      if (m !== null) {
+        m = m[0].split(" ");
+        result = `${m[1]} ${m[2]}`;
+      } else {
+        result = null;
+      }
+
+      return {
+        article_id: this.autoIncrement++,
+        article_local_id: currentValue.id,
+        article_section_name: currentValue.sectionName,
+        article_published_date: new Date(currentValue.webPublicationDate),
+        article_title: currentValue.webTitle,
+        article_source: currentValue.article_source,
+        article_web_url: currentValue.webUrl,
+        article_author_name: result
+      };
+    });
+
+    return news;
   }
 }
