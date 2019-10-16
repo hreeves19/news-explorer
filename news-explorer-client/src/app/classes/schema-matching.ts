@@ -64,7 +64,7 @@ export class SchemaMatching {
         article_id: this.autoIncrement++,
         article_local_id: null,
         article_section_name: null,
-        article_published_date: new Date(currentValue.publishedAt),
+        article_published_date: this.fixDate(new Date(currentValue.publishedAt)),
         article_title: currentValue.title,
         article_source: currentValue.source.name,
         article_web_url: currentValue.url,
@@ -82,7 +82,7 @@ export class SchemaMatching {
         article_id: this.autoIncrement++,
         article_local_id: currentValue._id,
         article_section_name: currentValue.section_name,
-        article_published_date: new Date(currentValue.pub_date),
+        article_published_date: this.fixDate(new Date(currentValue.pub_date)),
         article_title: currentValue.headline.main,
         article_source: currentValue.source,
         article_web_url: currentValue.web_url,
@@ -113,7 +113,7 @@ export class SchemaMatching {
         article_id: this.autoIncrement++,
         article_local_id: currentValue.id,
         article_section_name: currentValue.sectionName,
-        article_published_date: new Date(currentValue.webPublicationDate),
+        article_published_date: this.fixDate(new Date(currentValue.webPublicationDate)),
         article_title: currentValue.webTitle,
         article_source: currentValue.article_source,
         article_web_url: currentValue.webUrl,
@@ -123,5 +123,9 @@ export class SchemaMatching {
     });
 
     return news;
+  }
+
+  fixDate(date: Date) {
+    return `${date.getUTCMonth() + 1}-${ date.getUTCDate()}-${date.getUTCFullYear()}`;
   }
 }

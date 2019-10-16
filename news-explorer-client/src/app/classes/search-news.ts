@@ -12,11 +12,9 @@ export class SearchNews {
   googleTotal = 0;
   searchMappingGoogle = [
     {form: 'keyWords', local: 'q'},
-    {form: 'title', local: 'qInTitle'},
     {form: 'from', local: 'from'},
     {form: 'to', local: 'to'},
-    {form: 'language', local: 'language'},
-    {form: 'sortBy', local: 'sortBy'}
+    {form: 'language', local: 'language'}
   ];
   searchMappingNewYorkTimes = [
     {form: 'keyWords', local: 'q'},

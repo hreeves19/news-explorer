@@ -99,13 +99,14 @@ export class SearchComponent implements OnInit {
     );
   }
 
-  async onSubmit() {
+  onSubmit() {
     if (!this.searchForm.valid) {
       return;
     }
 
     this.isSearching = true;
     this.searchResults = 0;
+    this.isLoaded = false;
 
     this.searchGoogleHeadlines(this.searchNews.mapGoogleSearch(this.searchForm.value)); // Search Google
   }
@@ -113,7 +114,6 @@ export class SearchComponent implements OnInit {
   searchGoogleHeadlines(search: any) {
     this.googleNewsService.searchHeadlines(search).pipe(take(1)).subscribe(
       (result) => {
-        // this.searchResults += result['totalResults'];
         this.googleNews = result;
         // Search New York
         this.searchNewYorkTimes(this.searchNews.mapNewYorkTimes(this.searchForm.value));
@@ -125,7 +125,6 @@ export class SearchComponent implements OnInit {
   }
 
   searchNewYorkTimes(search: any) {
-    console.log(search);
     this.newYorkTimesService.searchArticles(search).pipe(take(1)).subscribe(
       (result) => {
         this.newYorkTimes = result;
@@ -143,6 +142,7 @@ export class SearchComponent implements OnInit {
         this.guardian = result;
         this.isLoaded = true;
         this.isSearching = false;
+        console.log("here");
       },
       (error) => {
         console.error(error);
