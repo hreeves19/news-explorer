@@ -2,6 +2,10 @@ table {
   width: 100%;
 }
 
+th.mat-sort-header-sorted {
+  color: black;
+}
+
 tr.example-detail-row {
   height: 0;
   margin: 2rem;
@@ -35,4 +39,5 @@ tr.example-element-row:not(.example-expanded-row):active {
 
 .button-link {
   width: 7rem;
+  margin-bottom: 1rem;
 }

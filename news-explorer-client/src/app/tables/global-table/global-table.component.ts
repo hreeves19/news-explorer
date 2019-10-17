@@ -1,6 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { SchemaMatching } from 'src/app/classes/schema-matching';
 import {animate, state, style, transition, trigger} from '@angular/animations';
+import {MatSort} from '@angular/material/sort';
+import {MatTableDataSource} from '@angular/material/table';
 
 @Component({
   selector: 'app-global-table',
@@ -21,6 +23,7 @@ export class GlobalTableComponent implements OnInit {
   @Input() newYorkTimes;
   shemaMatching: SchemaMatching = new SchemaMatching();
   tableData = new Array();
+  dataSource: any;
 
   columnsToDisplay  = ['article_id', 'article_title', 'article_source', 'article_published_date'];
   // columnsToDisplay = [
@@ -30,6 +33,7 @@ export class GlobalTableComponent implements OnInit {
   //   {name: 'Published', value: 'article_published_date'}
   // ];
   expandedArticle: any | null;
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
 
   constructor() {
   }
@@ -42,6 +46,9 @@ export class GlobalTableComponent implements OnInit {
     this.tableData = this.tableData.concat(this.shemaMatching.schemaMappingGoogle(this.googleNews.articles));
     this.tableData = this.tableData.concat(this.shemaMatching.schemaMappingNewYorkTimes(this.newYorkTimes.response.docs));
     this.tableData = this.tableData.concat(this.shemaMatching.schemaMappingGuardian(this.guardian.response.results));
+    this.dataSource = new MatTableDataSource(this.tableData);
+    this.dataSource.sort = this.sort;
+    console.log(this.dataSource);
     console.log(this.tableData);
   }
 
