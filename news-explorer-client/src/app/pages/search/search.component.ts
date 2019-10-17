@@ -52,33 +52,31 @@ export class SearchComponent implements OnInit {
   }
 
   searchForm = new FormGroup( {
-    keyWords: new FormControl('Trump', [Validators.required]),
+    keyWords: new FormControl('', [Validators.required]),
     source: new FormControl(this.newsSources[0].value),
     title: new FormControl(''),
     from: new FormControl(this.minDate),
     to: new FormControl(new Date()),
-    language: new FormControl(),
-    country: new FormControl(),
-    sortBy: new FormControl(this.sorts[2].value)
+    language: new FormControl()
   });
 
 
   ngOnInit() {
-    this.countryService.getAllCountries().subscribe(
-      (result) => {
-        this.countries = result;
+    // this.countryService.getAllCountries().subscribe(
+    //   (result) => {
+    //     this.countries = result;
 
-        let us = this.countries.find(item => {
-          return item.Code === 'US';
-        });
+    //     let us = this.countries.find(item => {
+    //       return item.Code === 'US';
+    //     });
 
-        // this.searchForm.listOfCountries.setValue(new Array(us.Code));
-        this.searchForm.controls['country'].setValue(us.Code);
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
+    //     // this.searchForm.listOfCountries.setValue(new Array(us.Code));
+    //     this.searchForm.controls['country'].setValue(us.Code);
+    //   },
+    //   (error) => {
+    //     console.log(error);
+    //   }
+    // );
 
     // Getting languages
     this.countryService.getAllLanguages().pipe(take(1)).subscribe(
@@ -100,6 +98,7 @@ export class SearchComponent implements OnInit {
   }
 
   onSubmit() {
+    console.log(this.f.keyWords);
     if (!this.searchForm.valid) {
       return;
     }
@@ -153,4 +152,6 @@ export class SearchComponent implements OnInit {
   resetContentHeight() {
     let main = document.getElementById('mainContent');
   }
+
+  get f() { return this.searchForm.controls; }
 }
