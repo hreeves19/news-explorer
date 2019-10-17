@@ -52,7 +52,7 @@ export class SearchComponent implements OnInit {
   }
 
   searchForm = new FormGroup( {
-    keyWords: new FormControl('', [Validators.required]),
+    keyWords: new FormControl('Trump', [Validators.required]),
     source: new FormControl(this.newsSources[0].value),
     title: new FormControl(''),
     from: new FormControl(this.minDate),

@@ -53,13 +53,16 @@
               <mat-datepicker #toDate></mat-datepicker>
             </mat-form-field>
           </div>
-
-          <!-- Title -->
         </div>
       </mat-card-content>
       <mat-card-actions>
         <button mat-raised-button color="secondary">Clear</button>
-        <button mat-raised-button color="primary" type="submit" [(disabled)]="isSearching">Search</button>
+        <button mat-raised-button color="primary" type="submit" [(disabled)]="isSearching">
+          <div class="button-container">
+              <span>Search</span>
+              <mat-spinner *ngIf="isSearching" diameter="25" color="accent"></mat-spinner>
+          </div>
+        </button>
       </mat-card-actions>
     </mat-card>
 </form>

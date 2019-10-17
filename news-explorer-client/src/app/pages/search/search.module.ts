@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatToolbarModule, MatFormFieldModule, MatCardModule, MatTableModule, MatSortModule, MatPaginatorModule, MatInputModule, MatButtonModule, MatSelectModule, MatDatepickerModule } from '@angular/material';
+import { MatToolbarModule, MatFormFieldModule, MatCardModule, MatTableModule, MatSortModule, MatPaginatorModule, MatInputModule, MatButtonModule, MatSelectModule, MatDatepickerModule, MatProgressSpinnerModule } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SearchComponent } from './search.component';
 import { GoogleNewsComponent } from '../../tables/google-news/google-news.component';
@@ -28,7 +28,8 @@ import { GlobalTableModule } from 'src/app/tables/global-table/global-table.modu
     MatSelectModule,
     ReactiveFormsModule,
     MatDatepickerModule,
-    GlobalTableModule
+    GlobalTableModule,
+    MatProgressSpinnerModule
   ]
 })
 export class SearchModule { }

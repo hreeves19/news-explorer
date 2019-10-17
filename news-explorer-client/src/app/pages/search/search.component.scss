@@ -26,3 +26,20 @@
   margin-left: 2rem;
   margin-right: 2rem;
 }
+
+.spinner {
+  float: left;
+  width: .25rem;
+  height: .25rem;
+  margin: 5px 10px 0px 0px;
+}
+
+.button-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+mat-spinner {
+  margin-left: .5rem;
+}
