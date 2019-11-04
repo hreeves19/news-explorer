@@ -4,6 +4,7 @@ import { pipe } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { NewYorkTimesSearch } from '../interfaces/new-york-times-search';
 import { GuardianSearch } from '../interfaces/guardian-search';
+import { GuardianService } from '../services/guardian.service';
 
 export class SearchNews {
   googleNews: any;

@@ -126,6 +126,7 @@ export class SchemaMatching {
   }
 
   fixDate(date: Date) {
-    return `${date.getUTCMonth() + 1}-${ date.getUTCDate()}-${date.getUTCFullYear()}`;
+    //return `${date.getUTCMonth() + 1}-${ date.getUTCDate()}-${date.getUTCFullYear()}`;
+    return date;
   }
 }
