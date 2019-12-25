@@ -4,6 +4,7 @@ require('dotenv').config({path: __dirname + '/.env'});
 const newYorkTimesRoute = require('./routes/newYorkTimesRoute');
 const guardianRoute = require('./routes/guardianRoute');
 const googleRoute = require('./routes/googleRoute');
+const alphaVantageRoute = require('./routes/alphaVanageRoute');
 
 // For reading json files
 var fs = require('fs');
@@ -42,6 +43,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/newyorktimes', newYorkTimesRoute);
 app.use('/guardian', guardianRoute);
 app.use('/google', googleRoute);
+app.use('/alphavantage', alphaVantageRoute);
 
 app.get('/', (req, res) => {
   res.send('\n\nHello, world dawgggg!\n\n');
