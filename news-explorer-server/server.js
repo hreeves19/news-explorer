@@ -5,6 +5,8 @@ const newYorkTimesRoute = require('./routes/newYorkTimesRoute');
 const guardianRoute = require('./routes/guardianRoute');
 const googleRoute = require('./routes/googleRoute');
 const alphaVantageRoute = require('./routes/alphaVanageRoute');
+const databaseRoute = require('./routes/database');
+const userDbRoutes = require('./routes/userRoute');
 
 // For reading json files
 var fs = require('fs');
@@ -44,6 +46,7 @@ app.use('/newyorktimes', newYorkTimesRoute);
 app.use('/guardian', guardianRoute);
 app.use('/google', googleRoute);
 app.use('/alphavantage', alphaVantageRoute);
+app.use('/data/user', userDbRoutes);
 
 app.get('/', (req, res) => {
   res.send('\n\nHello, world dawgggg!\n\n');
